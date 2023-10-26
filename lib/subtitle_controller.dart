@@ -10,7 +10,7 @@ class SubtitleController {
   });
   String? subtitlesContent;
   String? subtitleUrl;
-  final bool showSubtitles;
+  bool? showSubtitles;
   SubtitleDecoder? subtitleDecoder;
   SubtitleType subtitleType;
   bool _attached = false;
@@ -24,6 +24,21 @@ class SubtitleController {
   void detach() {
     _attached = false;
     _subtitleBloc = null;
+  }
+
+  void updateShowSubtitles({
+    required bool show,
+  }) {
+    if (_attached) {
+      showSubtitles = show;
+      _subtitleBloc!.add(
+        InitSubtitles(
+          subtitleController: this,
+        ),
+      );
+    } else {
+      throw Exception('Seems that the controller is not correctly attached.');
+    }
   }
 
   void updateSubtitleUrl({

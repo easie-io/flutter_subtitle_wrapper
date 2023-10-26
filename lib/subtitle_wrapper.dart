@@ -24,7 +24,8 @@ class SubtitleWrapper extends StatelessWidget {
     return Stack(
       children: <Widget>[
         videoChild,
-        if (subtitleController.showSubtitles)
+        if (subtitleController.showSubtitles != null &&
+            subtitleController.showSubtitles!)
           Positioned(
             top: subtitleStyle.position.top,
             bottom: subtitleStyle.position.bottom,
